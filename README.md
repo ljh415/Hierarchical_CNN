@@ -75,6 +75,7 @@ python train.py --epochs 15 --batch_size 32 --lr 0.008 --backbone wide_resnet_50
     ||only_fine|coarse+fine|
     |----|----|----|
     |acc|0.787|0.7832|
+- wandb report [Link](https://wandb.ai/ljh415/Classification_2022/reports/Experiments--VmlldzoyOTMxNDk1?accessToken=hu88icu6l2sv9ny3c2ag1ap550hkrxjqpc53h1b6f5m7smhkzj3ykl24d13tp94i)
 <br>
 
 ## To do
