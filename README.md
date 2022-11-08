@@ -45,6 +45,7 @@ python train.py --epochs 15 --batch_size 32 --lr 0.008 --backbone wide_resnet_50
 ```
 - If you want to train only_fine model, just add `--only_fine` above command  
 <br>
+
 ### Default Hyperparameter Setting
 - `optimizer` : `SGD`
     - or you can use `Adam`
@@ -69,6 +70,7 @@ python train.py --epochs 15 --batch_size 32 --lr 0.008 --backbone wide_resnet_50
 - Graph only fine vs. coarse+fine model
     ![graph](./images/graph.png)  
 <br>
+
 ## To do
 - Find best parameter for Coarse+fine model
     - coarse and fine loss weight
