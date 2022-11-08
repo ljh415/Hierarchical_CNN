@@ -8,7 +8,9 @@
 - wandb : 0.13.2
 ```
 pip install -r requirements.txt
-```
+```  
+<br>
+
 ## Dataset
 - [Cifar100](https://www.cs.toronto.edu/~kriz/cifar.html)
     - Use Superclass for Coarse label
@@ -25,13 +27,25 @@ python preprocess.py --dataset cifar100 --data_dir "data_dir" --types train,test
 - Main Goal is training Fine Label Classification
 - Concatenating Coarse feature and Fine feature
 - Using `1x1conv` layer for matching channel after concatenating
-- Simply Using Fc layer for Classifier
+- Simply Using Fc layer for Classifier  
+<br>
 
 ## Training (in progress)
 ```
 The following hyperparameters are not the best ones.
 The model is still training.
 ```
+- Training w/ wandb.sweep
+```
+train.py --epochs 15 --batch_size 32 --lr 0.008 --backbone wide_resnet_50 --wandb --sweep --sweep_count 5
+```
+- Training w/o wandb.sweep
+```
+python train.py --epochs 15 --batch_size 32 --lr 0.008 --backbone wide_resnet_50 --wandb --milestones 7,13
+```
+- If you want to train only_fine model, just add `--only_fine` above command  
+<br>
+### Default Hyperparameter Setting
 - `optimizer` : `SGD`
     - or you can use `Adam`
 - `batch_size` : `32`
@@ -53,8 +67,8 @@ The model is still training.
         - milestones : [7, 12]
     2. Traning "coarse+fine model" using above hyper parameter
 - Graph only fine vs. coarse+fine model
-    ![graph](./images/graph.png)
-
+    ![graph](./images/graph.png)  
+<br>
 ## To do
 - Find best parameter for Coarse+fine model
     - coarse and fine loss weight
