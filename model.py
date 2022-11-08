@@ -21,6 +21,7 @@ class HierarchyCNN(nn.Module):
             # fine
             self.fine_backbone, self.fine_avgpool, self.fine_classifier = self._make_wrs_backbone('fine', use_pretrained)
             self.fine_11conv = nn.Conv2d(3072, 2048, (1, 1))
+            # self.fine_11conv = nn.Conv2d(4096, 2048, (1, 1))  # exp2
         
         
     def _make_wrs_backbone(self, type_, use_pretrained):
@@ -29,12 +30,35 @@ class HierarchyCNN(nn.Module):
         if type_ == 'coarse':
             wrn50_backbone = nn.Sequential(OrderedDict(list(wrn50._modules.items())[:-3]))
             classifier =  nn.Linear(in_features=1024, out_features=20)
+            
+            # wrn50_backbone = nn.Sequential(OrderedDict(list(wrn50._modules.items())[:-2]))  # exp2 
+            # classifier =  nn.Linear(in_features=2048, out_features=20)  # exp2
+            
         elif type_ == 'fine':
             wrn50_backbone = nn.Sequential(OrderedDict(list(wrn50._modules.items())[:-2]))
             classifier = nn.Linear(in_features=2048, out_features=100)
             
         if use_pretrained:
             wrn50_backbone.requires_grad = False
+            
+            # if type_ == 'coarse':
+            #     for layer_name, layer_ in wrn50_backbone.named_parameters():  # exp1
+            #         if 'layer3' in layer_name :
+            #             layer_.requires_grad = True
+            #         else :
+            #             layer_.requires_grad = False
+            # else :
+            #     wrn50_backbone.requires_grad = False
+            
+            # if type_ == 'coarse':
+            #     for module_name, modules in wrn50_backbone.named_children():  # exp2
+            #         if module_name == 'layer4':
+            #             modules.requires_grad = True
+            #         else :
+            #             modules.requires_grad = False
+            # else :
+            #     wrn50_backbone.requires_grad = False
+                
         avg_pool = nn.AdaptiveAvgPool2d((1, 1))
         classifier = classifier.apply(self._init_weight)
         
@@ -92,7 +116,7 @@ class HierarchyCNN(nn.Module):
             # fine
             fine_out = self.fine_backbone(x)
             if self.backbone == 'wide_resnet_50':
-                coarse_cat = F.max_pool2d(coarse_cat, (3,3), 2, 1)
+                coarse_cat = F.max_pool2d(coarse_cat, (3,3), 2, 1)  # exp2
             fine_out = torch.cat((fine_out, coarse_cat), dim=1)
             fine_out = self.fine_11conv(fine_out)
             fine_out = self.fine_avgpool(fine_out)
