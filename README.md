@@ -1,4 +1,6 @@
 # Hierarchical_CNN
+## Reference paper
+- [Hierarchical image classification in CNNs](http://cs229.stanford.edu/proj2019spr/report/18.pdf)
 
 ## Environment
 - torch : 1.8.2+cu111
@@ -83,5 +85,3 @@ python train.py --epochs 15 --batch_size 32 --lr 0.008 --backbone wide_resnet_50
 - Apply other Backbone
     - [BiT](https://arxiv.org/abs/1912.11370)
 - Apply different feature synthesis instead of concatenating
-
-Reference : [Hierarchical image classification in CNNs](http://cs229.stanford.edu/proj2019spr/report/18.pdf)
