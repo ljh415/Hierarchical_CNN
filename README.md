@@ -45,6 +45,27 @@ The model is still training.
 
 ### optimizing model
 - Using `wandb.sweep`
+- Process
+    1. Optimizing "only fine model" using `wandb.sweep`
+        - batch_size :32
+        - epochs : 15
+        - lr : 0.0079
+        - milestones : [7, 12]
+    2. Traning "coarse+fine model" using above hyper parameter
+- Graph only fine vs. coarse+fine model
+    ![graph](./images/graph.png)
 
+## To do
+- Find best parameter for Coarse+fine model
+    - coarse and fine loss weight
+    - lr
+    - etc..
+- Change the layer to freeze on the Coarse Backbone
+- Apply other dataset with hierarchical label
+    - Deep Fashion
+    - etc..
+- Apply other Backbone
+    - [BiT](https://arxiv.org/abs/1912.11370)
+- Apply different feature synthesis instead of concatenating
 
 Reference : [Hierarchical image classification in CNNs](http://cs229.stanford.edu/proj2019spr/report/18.pdf)
