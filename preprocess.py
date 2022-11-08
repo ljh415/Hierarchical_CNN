@@ -83,6 +83,7 @@ class PreprocessCifar100:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset', type=str)
+    parser.add_argument('--data_dir', type=str)
     parser.add_argument('--types', type=str)
     args = parser.parse_args()
     
@@ -91,7 +92,7 @@ if __name__ == '__main__':
     # cifar100
     if args.dataset == 'cifar100':
         cifar100_data = PreprocessCifar100(
-            data_dir='/home/jaeho/hdd/datasets/cifar-100-python',
+            data_dir=args.data_dir,
             types=args.types
         )
         cifar100_data.preprocess()
