@@ -41,14 +41,14 @@ class HierarchyCNN(nn.Module):
         if use_pretrained:
             wrn50_backbone.requires_grad = False
             
-            # if type_ == 'coarse':
-            #     for layer_name, layer_ in wrn50_backbone.named_parameters():  # exp1
-            #         if 'layer3' in layer_name :
-            #             layer_.requires_grad = True
-            #         else :
-            #             layer_.requires_grad = False
-            # else :
-            #     wrn50_backbone.requires_grad = False
+            if type_ == 'coarse':
+                for layer_name, layer_ in wrn50_backbone.named_parameters():  # exp1
+                    if 'layer3' in layer_name :
+                        layer_.requires_grad = True
+                    else :
+                        layer_.requires_grad = False
+            else :
+                wrn50_backbone.requires_grad = False
             
             # if type_ == 'coarse':
             #     for module_name, modules in wrn50_backbone.named_children():  # exp2
