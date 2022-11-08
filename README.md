@@ -70,7 +70,11 @@ python train.py --epochs 15 --batch_size 32 --lr 0.008 --backbone wide_resnet_50
         - milestones : [7, 12]
     2. Traning "coarse+fine model" using above hyper parameter
 - Graph only fine vs. coarse+fine model
-    ![graph](./images/graph.png)  
+    ![graph](./images/graph.png)
+- Accuracy Comparison (max)
+    ||only_fine|coarse+fine|
+    |----|----|----|
+    |acc|0.787|0.7832|
 <br>
 
 ## To do
